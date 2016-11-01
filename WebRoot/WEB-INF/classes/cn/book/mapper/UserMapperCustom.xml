@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
+     注意：如果使用mapper代理方法开发，namespace有特殊重要的作用
+-->
+<mapper namespace="cn.book.mapper.UserMapperCustom">
+     
+     
+     <!-- 用户查询的sql片段，也就是用户的查询条件 -->
+     <sql id="query_users_where">
+       <!-- 使用动态sql，就是通过if判断，满足条件进行sql拼接 -->
+       <!-- 用户查询条件通过userQueryVo包装对象中userCustom属性传递 -->
+          <if test="userCustom!=null">
+              <if test="userCustom.name!=null and userCustom.name!=''">
+              	  users.name LIKE '%${userCustom.name}%'
+              </if>
+          </if>
+     </sql>
+           
+        <!-- 用户列表的查询
+                建议parameterType传入包装对象（其实就是包装了查询条件）
+                建议resultType使用扩展对象
+        -->               
+       <select id="findUserList" parameterType="cn.book.mapper.UserQueryVo" resultType="cn.book.po.UserCustom">
+       		SELECT * FROM users 
+       		<where>
+       		     <include refid="query_users_where"></include>
+       		</where>
+       </select>
+       
+       <insert id="addUser" parameterType="cd">
+         insert into user (id, uid, name, 
+          phonenum, passwd, 
+          token, timestamp, expires_in)
+          values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+            #{phonenum,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR},
+            #{token,jdbcType=VARCHAR}, #{timestamp,jdbcType=VARCHAR}, #{expiresIn,jdbcType=VARCHAR}) 	
+       </insert>    
+           
+</mapper>
+

@@ -1,0 +1,98 @@
+/*全局样式*/
+/*R:80;
+    * G:201;
+    * B:190;
+    */
+/*rgb()*/
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+/*注册页面主要的样式*/
+.book_main{
+    width: 100%;
+    height: 100%;
+    background: url("../image/web_login_bg.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.login_container{
+    width: 32%;
+    height: 100%;
+    /*background-color: whitesmoke;*/
+    margin: 0 auto;
+}
+.wrapper{
+    width:90%;
+    height:67%;
+    background-color: whitesmoke;
+    position: relative;
+    left:0.5%;
+    top:12px;
+}
+.book_logo{
+    /*background-color: green;*/
+    width:100%;
+    height:30%;
+    text-align: center;
+}
+.logo_image{
+    width:180px;
+    height:180px;
+    margin: auto auto;
+}
+.register{
+    font-size: 22px;
+    color:whitesmoke;
+}
+.enroll{
+   text-align: center;
+
+}
+.input{
+    margin-top: 30px;
+    border: 1px solid gray;
+}
+.inputNumber{
+    width: 53.5%;
+}
+.inputMessage{
+    width:29.5%;
+}
+.inputBtn{
+    background-color: rgb(80,201,190);
+    border:none;
+    border-radius: 3px;
+    color: whitesmoke;
+    cursor: pointer;
+
+}
+.inputWidth{
+    width:85%;
+}
+.inputHeight{
+    height: 35px;
+}
+.smallInfo{
+    font-size: 12px;
+    color:grey;
+    text-align: left;
+}
+.smallInfo a{
+    color: rgb(80,201,190);
+}
+/*注册页面，页脚样式*/
+.book_footer{
+    width:100%;
+    height:150px;
+    background-color: gray;
+}
+.warning{
+    border: 1px red solid;
+    color: red;
+}

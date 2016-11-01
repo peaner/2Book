@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	<!-- 扫描controller包 -->
+	
+	<context:component-scan base-package="cn.book.controller" />
+
+
+
+	<!-- 对静态资源的访问 -->
+	<!-- <mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/styles/" mapping="/styles/**" /> -->
+	<mvc:resources mapping="/register/**" location="/,/register/" />
+
+	<!-- 注解驱动 -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换 -->
+				<bean class="cn.book.convert.CustomDateConvert" />
+			</list>
+		</property>
+
+	</bean>
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:suffix=".jsp" p:prefix="/WEB-INF/jsp/" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:maxUploadSize="4096" />
+
+	<!-- 开启springmvc注解支持 -->
+	<context:annotation-config />
+
+	<!-- 开启aop 对类代理 -->
+	<aop:config proxy-target-class="true" /> 
+
+	<!-- 自定义异常处理 -->
+	<bean class="cn.book.exception.CustomExceptionResolver" />
+
+	<!-- 校验器 -->
+<!-- 	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		hibernate校验器
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean> -->
+	<!-- 校验错误信息配置文件 -->
+<!-- 	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		资源文件名
+		<property name="basenames">
+			<list>
+				<value>classpath:CustomValidationMessages</value>
+			</list>
+		</property>
+		资源文件编码格式
+		<property name="fileEncodings" value="utf-8" />
+		对资源文件内容缓存时间，单位秒
+		<property name="cacheSeconds" value="120" />
+	</bean> -->
+
+
+
+
+</beans>
