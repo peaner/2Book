@@ -75,7 +75,8 @@ public class UserServiceImpl implements UserService {
 			 ERROR = "用户名不用！";
 		}else if (cd.containsKey("tel")!=false) {
 			criteria.andPhonenumEqualTo(cd.getString("tel"));
-			SUCCESS = "手机号可用！";
+			SUCCESS = "手机号可用！验证码已发送";
+			cData.put("mes", 123456);
 			ERROR = "手机号已注册！";
 		}
 		
